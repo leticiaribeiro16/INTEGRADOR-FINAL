@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help | Demanda</title>
+</head>
+<body>
+  <form action="/demanda/update/{{demanda.id}}" method="POST">
+    Matéria: <input type="text" name="materia" value="{{demanda.materia}}"><br/>
+    Observações: <input type="text" name="observacoes" value="{{demanda.observacoes}}"><br/>
+    Requisitos: <input type="text" name="requisitos" value="{{demanda.requisitos}}"><br/>
+    Vagas Matutino: <input type="number" name='vagas_matutino' value="{{demanda.vagas_matutino}}"/><br />
+    Vagas Vespertino: <input type="number" name='vagas_vespertino' value="{{demanda.vagas_vespertino}}"/><br />
+    Vagas Noturno: <input type="number" name='vagas_noturno' value="{{demanda.vagas_noturno}}"/><br />
+    Vagas Flexível: <input type="number" name='vagas_flexivel' value="{{demanda.vagas_flexivel}}"/><br />
+    Bolsas Matutino: <input type="number" name='bolsas_matutino' value="{{demanda.bolsas_matutino}}"/><br />
+    Bolsas Vespertino: <input type="number" name='bolsas_vespertino' value="{{demanda.bolsas_vespertino}}"/><br />
+    Bolsas Noturno: <input type="number" name='bolsas_noturno' value="{{demanda.bolsas_noturno}}"/><br />
+    Bolsas Flexível: <input type="number" name='bolsas_flexivel' value="{{demanda.bolsas_flexivel}}" /><br />
+    <input type="submit" name="Atualizar">
+  </form> 
+</body>
+</html>

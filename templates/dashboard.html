@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help | Dashboard</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+    <header>
+      <nav>
+        <a class="logo"><img src="/static/assets/LOGO_HELP.svg" alt=""></a>
+        <div class="mobile-menu">
+          <div class="line1"></div>
+          <div class="line2"></div>
+          <div class="line3"></div>
+        </div>
+        <ul class="nav-list">
+          <li><a href="#">Início</a></li>
+          <li><a href="/demanda/create">Inscrições</a></li>
+          <li><a href="#">Demandas</a></li>
+          <li><a href="/usuarios/recovery">usuários</a></li>
+          <li> <a class="nav-link" href="{{url_for('usuarios.logoff')}}">Sair ({{ current_user.nome }})</a></li>
+        </ul>
+      </nav>
+    </header>
+  <h1>Olá, {{usuario.nome}}</h1>
+
+  <script>
+    class MobileNavbar {
+      constructor(mobileMenu, navList, navLinks) {
+        this.mobileMenu = document.querySelector(mobileMenu);
+        this.navList = document.querySelector(navList);
+        this.navLinks = document.querySelectorAll(navLinks);
+        this.activeClass = "active";
+    
+        this.handleClick = this.handleClick.bind(this);
+      }
+    
+      animateLinks() {
+        this.navLinks.forEach((link, index) => {
+          link.style.animation
+            ? (link.style.animation = "")
+            : (link.style.animation = `navLinkFade 0.5s ease forwards ${
+                index / 7 + 0.3
+              }s`);
+        });
+      }
+    
+      handleClick() {
+        this.navList.classList.toggle(this.activeClass);
+        this.mobileMenu.classList.toggle(this.activeClass);
+        this.animateLinks();
+      }
+    
+      addClickEvent() {
+        this.mobileMenu.addEventListener("click", this.handleClick);
+      }
+    
+      init() {
+        if (this.mobileMenu) {
+          this.addClickEvent();
+        }
+        return this;
+      }
+    }
+    
+    const mobileNavbar = new MobileNavbar(
+      ".mobile-menu",
+      ".nav-list",
+      ".nav-list li",
+    );
+    mobileNavbar.init();
+  </script>
+</body>
+</html>
