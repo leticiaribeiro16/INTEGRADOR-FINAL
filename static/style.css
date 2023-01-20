@@ -11,7 +11,7 @@ body,
 input {
   font-family: "Poppins", sans-serif;
 }
-
+/*LOGIN*/
 .container {
   position: relative;
   width: 100%;
@@ -414,22 +414,14 @@ a:hover {
 .logo {
   font-size: 24px;
   text-transform: uppercase;
-  letter-spacing: 4px;
 }
 
 nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
   background: #C21930;
   height: 8vh;
-}
-
-main {
-  background: url("bg.jpg") no-repeat center center;
-  background-size: cover;
-  height: 92vh;
 }
 
 .nav-list {
@@ -438,8 +430,8 @@ main {
 }
 
 .nav-list li {
-  letter-spacing: 3px;
   margin-left: 32px;
+  text-transform: uppercase;
 }
 
 .mobile-menu {
@@ -512,4 +504,56 @@ main {
   padding: 0.8rem;
   background: #ff1414;
   border-radius: 0.8rem;
+}
+/*TABLES*/
+.table thead{
+  background: #C21930;
+  color: #fff;
+}
+.contentTable{
+  display:flex; 
+  margin: auto;
+  width: 75%;
+}
+.rTable{
+  width: 100%; 
+  text-align: center;
+  margin-top: 2rem;
+}
+.rTable thead{
+  background: #C21930; 
+  font-weight: bold; 
+  color:#fff;
+}
+.rTable tbody tr:nth-child(2n){
+  background: #ccc;
+}
+.rTable th , .rTable td{
+  padding: 7px 0;
+}
+@media screen and (max-width: 480px){
+    .content{width: 94%;}
+
+    .rTable thead{display:none;}
+    .rTable tbody td{display: flex; flex-direction: column; }
+}
+@media only screen and (min-width: 1200px){
+    .content{width:100%;}
+    .rTable tbody tr td:nth-child(1){width:10%;}
+    .rTable tbody tr td:nth-child(2){width:30%;}
+    .rTable tbody tr td:nth-child(3){width:20%;}
+    .rTable tbody tr td:nth-child(4){width:20%;}
+    .rTable tbody tr td:nth-child(5){width:20%;}
+}
+.edit-btn, .del-btn{
+  margin-right: 0.5rem;
+  padding: 0.4rem;
+  border-radius: 0.8rem;
+  color: #fff;
+}
+.edit-btn{
+  background: #0c9509;
+}
+.del-btn{
+  background:  #ff1414;
 }

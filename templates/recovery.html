@@ -4,13 +4,50 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Help | Demanda</title>
+<link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-  <ul>
-  	{% for u in usuarios %}
-  		<li> {{u.nome}} - senha: {{u.senha}} - matricula: {{u.matricula}} - {{u.email}}</li>
-  	{% endfor %}
-	</ul>
+  <header>
+    <nav>
+      <a class="logo"><img src="/static/assets/LOGO_HELP.svg" alt=""></a>
+      <div class="mobile-menu">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </div>
+      <ul class="nav-list">
+        <li><a href="#">Início</a></li>
+        <li><a href="/demanda/create">Inscrições</a></li>
+        <li><a href="#">Demandas</a></li>
+        <li><a href="/usuarios/recovery">Usuários</a></li>
+        <li><a class="nav-link" href="{{url_for('usuarios.logoff')}}">Sair</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class='contentTable'>
+    <table class="rTable">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Matrícula</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for u in usuarios %}
+        <tr>
+          <th scope="row">{{u.id}}</th>
+          <td>{{u.nome}}</td>
+          <td>{{u.matricula}}</td>
+          <td>{{u.email}}</td>
+          <td><a href="/usuarios/update/{{u.id}}" class='edit-btn'>Editar</a><a href="/usuarios/delete/{{u.id}}" class='del-btn'>Excluir</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </body>
 </html>

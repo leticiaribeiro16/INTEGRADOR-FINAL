@@ -20,7 +20,9 @@
           <li><a href="#">Início</a></li>
           <li><a href="/demanda/create">Inscrições</a></li>
           <li><a href="#">Demandas</a></li>
-          <li><a href="/usuarios/recovery">usuários</a></li>
+          {% if current_user.admin %}
+            <li><a href="/usuarios/recovery">Usuários</a></li>
+          {% endif %}
           <li> <a class="nav-link" href="{{url_for('usuarios.logoff')}}">Sair ({{ current_user.nome }})</a></li>
         </ul>
       </nav>

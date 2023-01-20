@@ -5,12 +5,49 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Help | Demanda</title>
+  <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-	<ul>
-	{% for d in demanda %}
-		<li> {{d.materia}}, {{d.descricao}} <a href="/demanda/update/{{d.id}}">editar</a> <a href="/demanda/delete/{{d.id}}">excluir</a></li>
-	{% endfor %}
-	</ul>
+  <header>
+    <nav>
+      <a class="logo"><img src="/static/assets/LOGO_HELP.svg" alt=""></a>
+      <div class="mobile-menu">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </div>
+      <ul class="nav-list">
+        <li><a href="#">Início</a></li>
+        <li><a href="/demanda/create">Inscrições</a></li>
+        <li><a href="#">Demandas</a></li>
+        <li><a href="/usuarios/recovery">Usuários</a></li>
+        <li><a class="nav-link" href="{{url_for('usuarios.logoff')}}">Sair</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class='contentTable'>
+    <table class="rTable">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Matéria</th>
+          <th scope="col">Observações</th>
+          <th scope="col">Requisitos</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for d in demanda %}
+        <tr>
+          <th scope="row">{{d.id}}</th>
+          <td>{{d.materia}}</td>
+          <td>{{d.observacoes}}</td>
+          <td>{{d.requisitos}}</td>
+          <td><a href="/demanda/update/{{d.id}}" class='edit-btn'>Editar</a><a href="/demanda/delete/{{d.id}}" class='del-btn'>Excluir</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </body>
 </html>
