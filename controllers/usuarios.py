@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, Blueprint, url_for
 from database.models import Usuario
 from database.database import db, lm
-from flask_login import login_user, current_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 
 bp_usuarios = Blueprint('usuarios', __name__, template_folder='templates')
 
@@ -12,19 +12,20 @@ def cadastro():
   
   if request.method=='POST':
     nome = request.form.get('nome')
+    matricula = request.form.get('matricula')
     email = request.form.get('email')
     senha = request.form.get('senha')
-    matricula = request.form.get('matricula')
     
-    usuario = Usuario(nome, email, matricula, senha, False)
+    usuario = Usuario(nome, matricula, email, senha, False, False)
     db.session.add(usuario)
     db.session.commit()
 
     return redirect('/login')
 
 @bp_usuarios.route('/recovery')
-def recovery():
+def recovery(): 
   if not current_user.admin:
+    return 'Acesso não permitido'
     return redirect('/login')
     
   usuarios = Usuario.query.all()
@@ -32,6 +33,10 @@ def recovery():
 
 @bp_usuarios.route('/update/<int:id>', methods=['GET', 'POST'])
 def update(id):
+  if not current_user.admin:
+    return 'Acesso não permitido'
+    return redirect('/login')
+    
   usuario = Usuario.query.get(id)
   if id and request.method=='GET':
     return render_template('usuarios_update.html', usuario=usuario)
@@ -42,12 +47,14 @@ def update(id):
     matricula = request.form.get('matricula')
     senha = request.form.get('senha')
     admin = request.form.get('admin')
+    professor = request.form.get('professor')
     
     usuario.nome = nome
     usuario.email = email
     usuario.matricula = matricula
     usuario.senha = senha
     usuario.admin = eval(admin)
+    usuario.professor = eval(professor)
 
     db.session.add(usuario) 
     db.session.commit()
@@ -55,7 +62,12 @@ def update(id):
 
 @bp_usuarios.route('/delete/<int:id>', methods=['GET', 'POST'])
 def delete(id):
+  if not current_user.admin:
+    return 'Acesso não permitido'
+    return redirect('/login')
+    
   if id==0:
+    return 'É preciso definir um usuário para ser excluído'
     return redirect(url_for('usuarios'))
 
   if request.method == 'GET':
@@ -70,20 +82,25 @@ def delete(id):
 
 @lm.user_loader
 def load_user(id):
-  usuario = Usuario.query.filter_by(id=id).all()
+  usuario = Usuario.query.filter_by(id=id).first()
   return usuario
 
-@bp_usuarios.route('/login', methods=['POST'])
+@bp_usuarios.route('/dashboard', methods=['POST'])
 def login():
   matricula = request.form.get('matricula')
   senha = request.form.get('senha')
-  u = Usuario.query.filter(Usuario.matricula == matricula).first()
-  print(u)
-  if (u.matricula == matricula and senha == u.senha):
-    login_user(u)
-    return render_template('dashboard.html', usuario=u)
-  else:
-    return 'senha errada'
+  usuario = Usuario.query.filter_by(matricula = matricula).first()
+  try:
+    if (usuario.matricula == matricula and senha == usuario.senha):
+      login_user(usuario)
+      return render_template('dashboard.html', usuario = usuario)
+    else:
+      return 'senha errada'
+  except:
+    print('usuario não encontrado')
+    return render_template('acesso_negado.html')
+  finally: 
+    print(usuario)
 
 @bp_usuarios.route('/logoff')
 def logoff():

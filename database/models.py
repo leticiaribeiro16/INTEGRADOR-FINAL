@@ -9,13 +9,15 @@ class Usuario(db.Model, UserMixin):
   email = db.Column(db.String(100))
   senha = db.Column(db.String(100))
   admin = db.Column(db.Boolean)
+  professor = db.Column(db.Boolean)
 
-  def __init__(self, nome, email, matricula, senha, admin):
+  def __init__(self, nome, matricula, email, senha, admin, professor):
     self.nome = nome
     self.matricula = matricula
     self.email = email
     self.senha = senha
     self.admin = admin
+    self.professor = professor
   
   def __repr__(self):
       return "<Usuario {}>".format(self.nome)
@@ -25,7 +27,7 @@ class Demanda(db.Model):
   id = db.Column(db.Integer, primary_key = True, autoincrement = True)
   observacoes = db.Column(db.Text)
   materia = db.Column(db.String(100))
-  requistos = db.Column(db.Text)
+  requisitos = db.Column(db.Text)
   vagas_matutino = db.Column(db.Float)
   vagas_vespertino = db.Column(db.Float)
   vagas_noturno = db.Column(db.Float)
@@ -50,3 +52,24 @@ class Demanda(db.Model):
 
     def __repr__(self):
       return "<Demanda {}>".format(self.materia)
+
+class Inscricao(db.Model):
+  __tablename__= "inscricao"
+  id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+  nome = db.Column(db.String(100))
+  cpf = db.Column(db.String(100))
+  email = db.Column(db.String(100))
+  turno = db.Column(db.String(100))
+  matricula = db.Column(db.String(100))
+  telefone = db.Column(db.Float)
+
+  def __init__(self, nome, cpf, email, turno, matricula, telefone):
+    self.nome = nome
+    self.cpf = cpf
+    self.email = email
+    self.turno = turno
+    self.matricula = matricula
+    self.telefone = telefone
+  
+  def __repr__(self):
+      return "<Inscricao {}>".format(self.nome)

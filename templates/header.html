@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help! - {% block titulo %} Header {% endblock %}</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+    <header>
+      <nav>
+        <a class="logo"><img src="/static/assets/LOGO_HELP.svg" alt=""></a>
+        <div class="mobile-menu">
+          <div class="line1"></div>
+          <div class="line2"></div>
+          <div class="line3"></div>
+        </div>
+        <ul class="nav-list">
+          <li><a href="/usuarios/dashboard">Início</a></li>
+          <li><a href="/inscricao/recovery">Inscrições</a></li>
+          {% if current_user.professor %}
+          <li><a href="/demanda/recovery">Demandas</a></li>
+          {% endif %}
+          {% if current_user.admin %}
+            <li><a href="/usuarios/recovery">Usuários</a></li>
+          {% endif %}
+          <li> <a class="nav-link" href="{{url_for('usuarios.logoff')}}">Sair ({{ current_user.nome }})</a></li>
+        </ul>
+      </nav>
+    </header>
+  {% block container %}
+  {% endblock %}
+</body>
+</html>

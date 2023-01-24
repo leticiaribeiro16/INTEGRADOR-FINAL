@@ -6,7 +6,10 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-
+:root{
+  --color-principal: #43B6DB;
+  --color-secundary: #A1DBED;
+}
 body,
 input {
   font-family: "Poppins", sans-serif;
@@ -129,13 +132,13 @@ form.sign-in-form {
 }
 
 .social-icon:hover {
-  color: #750F1D;
-  border-color: #750F1D;
+  color: var(--color-principal);
+  border-color: var(--color-principal);
 }
 
 .btn {
   width: 150px;
-  background-color: #C21930;
+  background-color: var(--color-principal);
   border: none;
   outline: none;
   height: 49px;
@@ -149,7 +152,7 @@ form.sign-in-form {
 }
 
 .btn:hover {
-  background-color: #750F1D;
+  background-color:  var(--color-secundary);
 }
 .panels-container {
   position: absolute;
@@ -169,7 +172,7 @@ form.sign-in-form {
   top: -10%;
   right: 48%;
   transform: translateY(-50%);
-  background-image: linear-gradient(-45deg, #C21930 0%, #F51F3C 100%);
+  background-image: linear-gradient(-45deg,  var(--color-principal) 0%,  var(--color-secundary) 100%);
   transition: 1.8s ease-in-out;
   border-radius: 50%;
   z-index: 6;
@@ -420,7 +423,7 @@ nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background: #C21930;
+  background:  var(--color-principal);
   height: 8vh;
 }
 
@@ -457,7 +460,7 @@ nav {
     right: 0;
     width: 50vw;
     height: 92vh;
-    background: #C21930;
+    background:  var(--color-principal);
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
@@ -507,7 +510,7 @@ nav {
 }
 /*TABLES*/
 .table thead{
-  background: #C21930;
+  background:  var(--color-principal);
   color: #fff;
 }
 .contentTable{
@@ -521,7 +524,7 @@ nav {
   margin-top: 2rem;
 }
 .rTable thead{
-  background: #C21930; 
+  background:  var(--color-principal); 
   font-weight: bold; 
   color:#fff;
 }
@@ -556,4 +559,17 @@ nav {
 }
 .del-btn{
   background:  #ff1414;
+}
+/*PAGES*/
+.btn-adc{
+  float: right;
+  padding: 0.8rem;
+  background:  var(--color-principal);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 0.8rem;
+}
+#recovery{
+  margin-right: 4rem;
+  margin-left: 4rem;
 }

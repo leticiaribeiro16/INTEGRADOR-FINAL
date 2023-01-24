@@ -1,23 +1,23 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Help | Usuário</title>
-</head>
-<body>
+{% extends 'header.html' %}
+  {% block titulo %}
+    Demanda
+  {% endblock %}
+  {% block container %}
   <form action="/usuarios/update/{{usuario.id}}" method="POST">
     Nome: <input type="text" name="nome" value="{{usuario.nome}}"><br/>
     E-mail: <input type="email" name="email" value="{{usuario.email}}"><br/>
     Matrícula: <input type="text" name="matricula" value="{{usuario.matricula}}"><br/>
     Senha: <input type="text" name="senha" value="{{usuario.senha}}"><br/>
-    Administrador: 
+    Membro Comissão: 
     <select name="admin">
       <option value="True" {{ 'selected' if usuario.admin }}> Sim</option>
       <option value="False" {{ 'selected' if not usuario.admin }}> Não</option>
     </select><br>
+    Professor: 
+    <select name="professor">
+      <option value="True" {{ 'selected' if usuario.professor }}> Sim</option>
+      <option value="False" {{ 'selected' if not usuario.professor }}> Não</option>
+    </select><br>
     <input type="submit" name="Editar">
   </form>
-</body>
-</html>
+{% endblock %}

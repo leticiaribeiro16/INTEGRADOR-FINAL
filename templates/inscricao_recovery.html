@@ -1,0 +1,41 @@
+  {% extends 'header.html' %}
+  {% block titulo %}
+    Inscrição
+  {% endblock %}
+  {% block container %}
+  <section id='recovery'>
+    <a href="/inscricao/create" class="btn-adc">Adicionar</a>
+  </section>
+  <div class='contentTable'>
+    <table class="rTable">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">CPF</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">Turno</th>
+          <th scope="col">Matrícula</th>
+          <th scope="col">Telefone</th>
+          <th scope='col'>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in inscricao %}
+        <tr>
+          <th scope="row">{{i.id}}</th>
+          <td>{{i.nome}}</td>
+          <td>{{i.cpf}}</td>
+          <td>{{i.email}}</td>
+          <td>{{i.turno}}</td>
+          <td>{{i.matricula}}</td>
+          <td>{{i.telefone}}</td>
+          {% if current_user.admin %}
+          <td><a href="/inscricao/update/{{i.id}}" class='edit-btn'>Editar</a><a href="/inscricao/delete/{{i.id}}" class='del-btn'>Excluir</a></td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

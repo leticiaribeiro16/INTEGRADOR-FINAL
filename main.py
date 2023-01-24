@@ -5,19 +5,26 @@ from database.database import db, lm
 from flask_migrate import Migrate
 from database.models import Usuario
 from database.models import Demanda
+from database.models import Inscricao
 from controllers.usuarios import bp_usuarios
 from controllers.demanda import bp_demanda
+from controllers.inscricao import bp_inscricao
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'HELP'
 app.register_blueprint(bp_usuarios, url_prefix='/usuarios')
 app.register_blueprint(bp_demanda, url_prefix='/demanda')
+app.register_blueprint(bp_inscricao, url_prefix='/inscricao')
 
 conexao = "sqlite:///meubanco.db"
 app.config['SQLALCHEMY_DATABASE_URI'] = conexao
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 @app.route('/')
+def indexx(): 
+  return render_template('login.html')
+
+@app.route('/usuarios/dashboard')
 def index():
 	if current_user.is_authenticated:
 		return render_template('dashboard.html')

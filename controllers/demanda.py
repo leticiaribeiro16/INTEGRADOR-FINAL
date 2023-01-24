@@ -8,35 +8,47 @@ bp_demanda = Blueprint("demanda", __name__, template_folder='templates')
 
 @bp_demanda.route('/recovery')
 def recovery():
-	demanda = Demanda.query.all()
-	return render_template('demanda_recovery.html', demanda = demanda)
+  if not current_user.professor:
+    return 'Acesso não permitido'
+    return redirect('/login')
+    
+  demanda = Demanda.query.all()
+  return render_template('demanda_recovery.html', demanda = demanda)
 
 @bp_demanda.route('/create', methods=['GET', 'POST'])
 def create():
-	if request.method=='GET':
-		return render_template('demanda_create.html')
-
-	if request.method=='POST':
-		materia = request.form.get('materia')
-		observacoes = request.form.get('observacoes')
-		requisitos = request.form.get('requisitos')
-		vagas_matutino = request.form.get('vagas_matutino')
-		vagas_vespertino = request.form.get('vagas_vespertino')
-		vagas_noturno = request.form.get('vagas_noturno')
-		vagas_flexivel = request.form.get('vagas_flexivel')
-		bolsas_matutino = request.form.get('bolsas_matutino')
-		bolsas_vespertino = request.form.get('bolsas_vespertino')
-		bolsas_noturno = request.form.get('bolsas_noturno')
-		bolsas_flexivel = request.form.get('bolsas_flexivel')
+  if not current_user.professor:
+    return 'Acesso não permitido'
+    return redirect('/login')
     
-		demanda = Demanda(materia, observacoes, requisitos, vagas_matutino, vagas_vespertino, vagas_noturno, vagas_flexivel, bolsas_matutino, bolsas_vespertino, bolsas_noturno, bolsas_flexivel)
-		db.session.add(demanda)
-		db.session.commit()
+  if request.method=='GET':
+    return render_template('demanda_create.html')
 
-		return redirect('/demanda/recovery')
+  if request.method=='POST':
+    materia = request.form.get('materia')
+    observacoes = request.form.get('observacoes')
+    requisitos = request.form.get('requisitos')
+    vagas_matutino = request.form.get('vagas_matutino')
+    vagas_vespertino = request.form.get('vagas_vespertino')
+    vagas_noturno = request.form.get('vagas_noturno')
+    vagas_flexivel = request.form.get('vagas_flexivel')
+    bolsas_matutino = request.form.get('bolsas_matutino')
+    bolsas_vespertino = request.form.get('bolsas_vespertino')
+    bolsas_noturno = request.form.get('bolsas_noturno')
+    bolsas_flexivel = request.form.get('bolsas_flexivel')
+    
+    demanda = Demanda(materia, observacoes, requisitos, vagas_matutino, vagas_vespertino, vagas_noturno, vagas_flexivel, bolsas_matutino, bolsas_vespertino, bolsas_noturno, bolsas_flexivel)
+    db.session.add(demanda)
+    db.session.commit()
+
+  return redirect('/demanda/recovery')
 
 @bp_demanda.route('/update/<int:id>', methods=['GET', 'POST'])
 def update(id):
+  if not current_user.professor:
+    return 'Acesso não permitido'
+    return redirect('/login')
+    
   if id and request.method=='GET':
     demanda = Demanda.query.get(id)
     return render_template('demanda_update.html', demanda=demanda)
@@ -61,6 +73,10 @@ def update(id):
 
 @bp_demanda.route('/delete/<int:id>', methods=['GET', 'POST'])
 def delete(id):
+  if not current_user.professor:
+    return 'Acesso não permitido'
+    return redirect('/login')
+    
   if request.method == 'GET':
     demanda = Demanda.query.get(id)
     return render_template('demanda_delete.html', demanda = demanda)

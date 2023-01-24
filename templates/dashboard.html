@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
@@ -7,28 +7,13 @@
   <title>Help | Dashboard</title>
   <link rel="stylesheet" href="/static/style.css" />
 </head>
-<body>
-    <header>
-      <nav>
-        <a class="logo"><img src="/static/assets/LOGO_HELP.svg" alt=""></a>
-        <div class="mobile-menu">
-          <div class="line1"></div>
-          <div class="line2"></div>
-          <div class="line3"></div>
-        </div>
-        <ul class="nav-list">
-          <li><a href="#">Início</a></li>
-          <li><a href="/demanda/create">Inscrições</a></li>
-          <li><a href="#">Demandas</a></li>
-          {% if current_user.admin %}
-            <li><a href="/usuarios/recovery">Usuários</a></li>
-          {% endif %}
-          <li> <a class="nav-link" href="{{url_for('usuarios.logoff')}}">Sair ({{ current_user.nome }})</a></li>
-        </ul>
-      </nav>
-    </header>
-  <h1>Olá, {{usuario.nome}}</h1>
-
+<body> -->
+  {% extends 'header.html' %}
+  {% block titulo %}
+    Dashboard
+  {% endblock %}
+  {% block container %}
+  <h1>Olá, {{current_user.nome}}</h1>
   <script>
     class MobileNavbar {
       constructor(mobileMenu, navList, navLinks) {
@@ -75,5 +60,6 @@
     );
     mobileNavbar.init();
   </script>
-</body>
-</html>
+{% endblock %}
+<!-- </body>
+</html> -->
